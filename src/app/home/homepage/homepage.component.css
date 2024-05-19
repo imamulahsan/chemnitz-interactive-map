@@ -1,0 +1,20 @@
+/* Ensure the container takes up the full viewport */
+html, body, .container-fluid {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style for the map container to take up half the height and width */
+  .map-container {
+    height: 50vh; /* 50% of viewport height */
+    width: 50vw;  /* 50% of viewport width */
+    border: 1px solid #ccc; /* Optional: to see the container boundaries */
+  }
+  
