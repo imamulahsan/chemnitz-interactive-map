@@ -1,0 +1,41 @@
+.container-fluid {
+    padding-left: 30px; /* Reduce padding as needed */
+    padding-right: 30px; /* Reduce padding as needed */
+  }
+  
+  .sidebar {
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  h2{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .btn-group-vertical .btn {
+    width: 90%;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  background-color: #ff5733; /* Custom button color */
+  border-color: #ff5733; /* Custom border color */
+  }
+  
+  .map {
+    height: 500px; /* Adjust height as needed */
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .col-md-3 {
+      max-width: 25%; /* Adjust the width as needed */
+    }
+    
+    .col-md-9 {
+      max-width: 75%; /* Adjust the width as needed */
+    }
+  }
+  

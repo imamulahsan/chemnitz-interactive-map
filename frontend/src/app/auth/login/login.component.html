@@ -1,17 +1,26 @@
 <!-- src/app/login/login.component.html -->
-<div class="container">
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 d-none d-md-block">
+      <img src="assets/login.jpg" alt="Login Image" class="img-fluid">
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="login-form">
+        <h2>Login</h2>
+        <form (ngSubmit)="login()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        <button (click)="goToRegister()" class="btn btn-link mt-3 w-100">Don't have an account? Register here</button>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <button (click)="goToRegister()" class="btn btn-link">Don't have an account? Register here</button>
+    </div>
   </div>
-  
+</div>
+

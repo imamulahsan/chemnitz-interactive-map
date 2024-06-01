@@ -1,0 +1,70 @@
+/* src/app/login/login.component.css */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    min-height: 100vh;
+  }
+  
+  .img-fluid {
+    max-height: 100vh;
+    object-fit: cover;
+    filter: blur(0.50px); /* Blur effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow effect */
+    border-radius: 8px; /* Optional: Rounded corners */
+    transition: transform 0.3s ease-in-out; /* Smooth transition effect */
+  }
+  
+  .img-fluid:hover {
+    transform: scale(0.95); /* Slightly enlarge the image on hover */
+  }
+  
+  .login-form {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border-radius: 10px; /* Rounded corners */
+    padding: 2rem; /* Padding inside the form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    color: rgb(14, 14, 14); /* Text color */
+    max-width: 400px; /* Optional: Max width for the form */
+    width: 100%; /* Full width */
+  }
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    color: rgb(9, 9, 9); /* Ensure the heading text is readable */
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: rgb(11, 11, 11); /* Ensure the label text is readable */
+  }
+  
+  .form-control {
+    background-color: rgba(197, 170, 158, 0.2); /* Semi-transparent input background */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border color */
+    color: rgb(18, 18, 18); /* Text color */
+  }
+  
+  .form-control::placeholder {
+    color: rgba(161, 56, 56, 0.7); /* Placeholder text color */
+  }
+  
+  .btn-primary {
+    margin-top: 1rem;
+  background-color: #ff5733; /* Custom button color */
+  border-color: #ff5733; /* Custom border color */
+  }
+
+  .btn-primary:hover {
+    background-color: #c70039; /* Custom hover color */
+    border-color: #c70039; /* Custom hover border color */
+  }
+  
+  .btn-link {
+    text-align: center;
+    color: rgb(11, 11, 11); /* Link color */
+  }
+  
