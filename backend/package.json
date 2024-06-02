@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"npm run serve:frontend\" \"npm run serve:backend\"",
+    "serve:frontend": "cd ../frontend && ng serve --port 4201",
+    "serve:backend": "npx nodemon server.js",
+    "build": "cd ../frontend && ng build"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +22,9 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.2"
   }
 }

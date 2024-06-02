@@ -8,7 +8,7 @@ import { tap, map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private authUrl = 'http://localhost:3000/api/auth';
+  private authUrl = 'http://localhost:3000/api';
   private authToken = new BehaviorSubject<string | null>(this.getToken());
 
   constructor(private http: HttpClient) { }

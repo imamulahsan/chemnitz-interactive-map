@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
-const authRoutes = require("./routes/auth");
-app.use("/api/auth", authRoutes);
+const authRoutes = require("./routes/allRoute");
+app.use("/api", authRoutes); // Ensure the base path is correct
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`.bgYellow);

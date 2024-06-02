@@ -20,10 +20,18 @@
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
-  background-color: #ff5733; /* Custom button color */
-  border-color: #ff5733; /* Custom border color */
+  background-color: #2471A3; /* Custom button color */
+  border-color: #e6dedc; /* Custom border color */
   }
-  
+
+  .btn-group-vertical .btn:hover {
+    background-color: #F9E79F; /* Hover background color */
+    border-color: #ffffff; /* Hover border color */
+    color: black;
+  }
+
+
+
   .map {
     height: 500px; /* Adjust height as needed */
     width: 100%;

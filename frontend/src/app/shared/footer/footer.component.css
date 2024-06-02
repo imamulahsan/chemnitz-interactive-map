@@ -3,7 +3,7 @@
     width: 100%;
     text-align: left;
     padding: 20px 0;
-    background-color: #f8f9fa;
+    background-color: #2471A3;
   }
   
   .footer h5 {
@@ -11,7 +11,7 @@
   }
   
   .footer p, .footer a {
-    color: #6c757d;
+    color: white;
     text-decoration: none;
   }
   
@@ -21,9 +21,9 @@
   
   .footer .fab {
     font-size: 1.5rem;
-    color: #6c757d;
+    color: white;
   }
   
   .footer .fab:hover {
-    color: #0056b3;
+    color: #F9E79F;
   }
