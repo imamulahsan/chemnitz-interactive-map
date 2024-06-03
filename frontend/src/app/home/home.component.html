@@ -3,10 +3,13 @@
     <div class="col-12 col-md-3 mb-4 mb-md-0">
       <div class="sidebar">
         <h2>Home Location</h2>
-        <div class="btn-group-vertical w-100">
-          <!-- Remove this button as the home location will be set via map click -->
-          <!-- <button class="btn btn-primary" (click)="setHomeLocation()">Set Home Location</button> -->
+        <div *ngIf="homeLocation; else noLocation">
+          <p>Latitude: {{ homeLocation.lat }}</p>
+          <p>Longitude: {{ homeLocation.lng }}</p>
         </div>
+        <ng-template #noLocation>
+          <p>No home location set.</p>
+        </ng-template>
         <br>
         <br>
         <br>
