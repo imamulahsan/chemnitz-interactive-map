@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
 
+  showSchoolsButtonText = 'Schools';  // Text for the schools button
+  areSchoolsShown = false;  // Boolean to track if schools are shown
+
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -168,8 +171,16 @@ export class HomeComponent {
     return this.markers;
   }
 
-  // Method to show schools on map
-  showSchools() {
+  toggleSchools() {
+    if (this.areSchoolsShown) {
+      this.resetSchools();
+    } else {
+      this.showSchools();
+    }
+  }
+
+   // Method to show schools on map
+   showSchools() {
     if (this.schoolLayer) {
       console.log('Removing existing school layer');  // Debugging
       this.map?.removeLayer(this.schoolLayer);  // Remove existing school layer if any
@@ -191,9 +202,22 @@ export class HomeComponent {
           }
         });
         this.schoolLayer.addTo(this.map);
+        this.areSchoolsShown = true;  // Set to true when schools are shown
+        this.showSchoolsButtonText = 'Reset';  // Change button text to Reset
       }
     }, error => {
       console.error('Error fetching school data:', error);
     });
+  }
+
+  resetSchools() {
+    // Remove all existing markers
+    this.removeAllMarkers();
+    if (this.schoolLayer) {
+      this.map?.removeLayer(this.schoolLayer);
+      this.schoolLayer = undefined;  // Clear the school layer
+    }
+    this.areSchoolsShown = false;  // Set to false when schools are reset
+    this.showSchoolsButtonText = 'Schools';  // Change button text back to Schools
   }
 }
