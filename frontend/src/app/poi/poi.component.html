@@ -1,0 +1,35 @@
+<div class="container-fluid mt-4 mb-4">
+    <div class="row">
+      <div class="col-12 col-md-3 mb-4 mb-md-0">
+        <div class="sidebar">
+            <div class="homecard">
+                <i class="fa fa-home"> Home Location</i>
+
+              <div *ngIf="homeLocation; else noLocation">
+                <p>Latitude: {{ homeLocation.lat }}</p>
+                <p>Longitude: {{ homeLocation.lng }}</p>
+              </div>
+              <ng-template #noLocation>
+                <p>Set a Home Location after registering in app and clicking on the map.</p>
+              </ng-template>
+              </div>
+          <br>
+          <div class="homecard">
+            <i class="fa fa-map-pin" >  Point of Interest</i>
+          <div *ngIf="poiLocation; else noPOILocation">
+            <p>Latitude: {{ poiLocation.lat }}</p>
+            <p>Longitude: {{ poiLocation.lng }}</p>
+          </div>
+          <ng-template #noPOILocation>
+            <p>No POI location set.</p>
+          </ng-template>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-12 col-md-9">
+        <div leaflet style="height: 500px;" [leafletOptions]="options" class="map" (leafletClick)="onMapClick($event)" (leafletMapReady)="onMapReady($event)"></div>
+      </div>
+    </div>
+  </div>
+

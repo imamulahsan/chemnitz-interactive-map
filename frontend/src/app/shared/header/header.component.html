@@ -14,27 +14,20 @@
           <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/schools">Schools</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/kindergarten">Kindergarten</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/social-child-projects">Social Child Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/social-teenager-projects">Social Teenager Projects</a>
+          <a class="nav-link" routerLink="/poi">Point of Interest</a>
         </li>
         <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
           <a class="nav-link" routerLink="/login">
-            <i class="fas fa-sign-in-alt"></i> <!-- Font Awesome Login Icon -->
+            Login <!-- Font Awesome Login Icon -->
           </a>
         </li>
         <li class="nav-item" *ngIf="isAuthenticated$ | async">
           <a class="nav-link" (click)="logout()">
-            <i class="fas fa-sign-out-alt"></i> <!-- Font Awesome Logout Icon -->
+            Log Out <!-- Font Awesome Logout Icon -->
           </a>
         </li>
+
+       
       </ul>
     </div>
   </div>

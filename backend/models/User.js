@@ -11,6 +11,13 @@ const userSchema = new mongoose.Schema({
     },
     required: false,
   },
+  pointOfInterest: {
+    type: {
+      lat: { type: Number, required: true },
+      lng: { type: Number, required: true },
+    },
+    required: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {

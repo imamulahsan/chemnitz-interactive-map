@@ -17,6 +17,7 @@ import { SocialteenagerComponent } from './socialteenager/socialteenager.compone
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { PoiComponent } from './poi/poi.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegisterComponent } from './auth/register/register.component';
     SocialchildComponent,
     SocialteenagerComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PoiComponent
   ],
   imports: [
     BrowserModule,

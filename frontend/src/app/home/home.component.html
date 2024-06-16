@@ -2,24 +2,27 @@
   <div class="row">
     <div class="col-12 col-md-3 mb-4 mb-md-0">
       <div class="sidebar">
-        <h2>Home Location</h2>
+        <div class="homecard">
+          <i class="fa fa-home"> Home Location</i>
+
         <div *ngIf="homeLocation; else noLocation">
           <p>Latitude: {{ homeLocation.lat }}</p>
           <p>Longitude: {{ homeLocation.lng }}</p>
         </div>
         <ng-template #noLocation>
-          <p>No home location set.</p>
+          <p>Set a Home Location after registering in app and clicking on the map.</p>
         </ng-template>
+        </div>
         <br>
         <br>
         <br>
         <br>
         <h2>Filters</h2>
         <div class="btn-group-vertical w-100" role="group" aria-label="Filter buttons">
-          <button class="btn btn-primary" (click)="toggleSchools()">{{ showSchoolsButtonText }}</button>
-          <button class="btn btn-primary">Kindergartens</button>
-          <button class="btn btn-primary">Social Child Projects</button>
-          <button class="btn btn-primary">Social Teenager Projects</button>
+          <button class="btn btn-primary" (click)="navigateToSchool()">Schools</button>
+          <button class="btn btn-primary" (click)="navigateToKindergarden()">Kindergartens</button>
+          <button class="btn btn-primary" (click)="navigateToSCP()">Social Child Projects</button>
+          <button class="btn btn-primary" (click)="navigateToSTP()">Social Teenager Projects</button>
         </div>
       </div>
     </div>
@@ -28,5 +31,3 @@
     </div>
   </div>
 </div>
-
-

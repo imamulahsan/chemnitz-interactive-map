@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
     user = new User({ username, password });
     await user.save();
 
-    const payload = { id: user.id };
+    const payload = { id: user.id, username: user.username };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
-    const payload = { id: user.id };
+    const payload = { id: user.id, username: user.username };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -95,6 +95,46 @@ router.get("/homeLocation", auth, async (req, res) => {
     }
 
     res.status(200).json({ homeLocation: user.homeLocation });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Save point of interest route
+router.put("/pointOfInterest", auth, async (req, res) => {
+  try {
+    const { lat, lng } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    user.pointOfInterest = { lat, lng };
+    await user.save();
+
+    res.status(200).json({
+      msg: "Point of interest updated",
+      pointOfInterest: user.pointOfInterest,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// Get POI location route
+router.get("/pointOfInterest", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.status(200).json({ pointOfInterest: user.pointOfInterest });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

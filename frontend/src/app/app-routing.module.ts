@@ -8,15 +8,17 @@ import { SchoolComponent } from './school/school.component';
 import { KindergardenComponent } from './kindergarden/kindergarden.component';
 import { SocialchildComponent } from './socialchild/socialchild.component';
 import { SocialteenagerComponent } from './socialteenager/socialteenager.component';
+import { PoiComponent } from './poi/poi.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'schools', component: SchoolComponent },
-  { path: 'kindergarten', component: KindergardenComponent },
+  { path: 'school', component: SchoolComponent },
+  { path: 'kindergarden', component: KindergardenComponent },
   { path: 'social-child-projects', component: SocialchildComponent },
   { path: 'social-teenager-projects', component: SocialteenagerComponent },
+  { path: 'poi', component: PoiComponent },
 ];
 
 @NgModule({

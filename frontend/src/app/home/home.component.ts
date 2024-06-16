@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { icon, latLng, marker, tileLayer, Map, LeafletMouseEvent, popup, Marker, geoJSON, Layer } from 'leaflet';
+import { icon, latLng, marker, tileLayer, Map, LeafletMouseEvent, popup, Marker } from 'leaflet';
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  showSchoolsButtonText = 'Schools';  // Text for the schools button
-  areSchoolsShown = false;  // Boolean to track if schools are shown
-
   options = {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -25,30 +21,17 @@ export class HomeComponent {
   map: Map | undefined;
   homeLocation: { lat: number, lng: number } | null = null;
   homeMarker: Marker | undefined;
-  markers: Marker[] = [];  // Store markers in an array
-  schoolLayer: Layer | undefined;  // To store the school layer
 
-  // Define the custom icon for schools without shadow
-  schoolIcon = icon({
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-    iconSize: [25, 41],
+  // Define the custom icon for home
+  homeIcon = icon({
+    iconUrl: 'assets/home.png',
+    iconSize: [32, 32],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+    shadowUrl: ''
   });
 
-  // Define the custom icon for home without shadow
-  homeIcon = icon({
-    iconUrl: 'assets/home.png',  // Replace with the path to your custom image
-    iconSize: [25, 41],  // Adjust the size to fit your custom image
-    iconAnchor: [12, 41],  // Anchor point of the marker
-    popupAnchor: [1, -34],  // Popup position
-    shadowUrl: ''  // No shadow
-  });
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.getHomeLocation();
@@ -56,7 +39,6 @@ export class HomeComponent {
 
   onMapReady(map: Map) {
     this.map = map;
-    // Add any initial markers here if needed
   }
 
   onMapClick(event: LeafletMouseEvent) {
@@ -74,7 +56,6 @@ export class HomeComponent {
       .setContent(popupContent)
       .openOn(this.map!);
 
-    // Attach event listener to the buttons
     setTimeout(() => {
       const confirmButton = document.getElementById('confirmButton');
       confirmButton?.addEventListener('click', () => {
@@ -101,8 +82,8 @@ export class HomeComponent {
       }
     }).subscribe(response => {
       console.log('Home location updated:', response);
-      this.homeLocation = { lat, lng };  // Update the local homeLocation variable
-      this.updateHomeMarker();  // Update the marker on the map
+      this.homeLocation = { lat, lng };
+      this.updateHomeMarker();
     }, error => {
       console.error('Error updating home location:', error);
     });
@@ -121,7 +102,7 @@ export class HomeComponent {
     }).subscribe(response => {
       console.log('Fetched home location:', response);
       this.homeLocation = response.homeLocation;
-      this.updateHomeMarker();  // Update the marker on the map
+      this.updateHomeMarker();
     }, error => {
       console.error('Error fetching home location:', error);
     });
@@ -130,7 +111,7 @@ export class HomeComponent {
   updateHomeMarker() {
     if (this.map && this.homeLocation) {
       if (this.homeMarker) {
-        this.map.removeLayer(this.homeMarker);  // Remove existing marker if any
+        this.map.removeLayer(this.homeMarker);
       }
       this.homeMarker = marker([this.homeLocation.lat, this.homeLocation.lng], {
         icon: this.homeIcon
@@ -138,86 +119,19 @@ export class HomeComponent {
     }
   }
 
-  addSchoolMarker(lat: number, lng: number, popupText: string) {
-    console.log(`Adding school marker at ${lat}, ${lng}`);  // Debugging
-    if (this.map) {
-      const existingMarker = this.markers.find(m => m.getLatLng().lat === lat && m.getLatLng().lng === lng);
-      if (!existingMarker) {
-        const schoolMarker = marker([lat, lng], {
-          icon: this.schoolIcon
-        }).addTo(this.map).bindPopup(popupText);
-        this.markers.push(schoolMarker);
-      }
-    }
+  navigateToSchool() {
+    this.router.navigate(['/school']);
   }
 
-  removeAllMarkers() {
-    if (this.map) {
-      this.markers.forEach(marker => {
-        this.map!.removeLayer(marker);
-      });
-      this.markers = [];
-    }
+  navigateToKindergarden() {
+    this.router.navigate(['/kindergarden']);
   }
 
-  removeMarker(markerToRemove: Marker) {
-    if (this.map) {
-      this.map.removeLayer(markerToRemove);
-      this.markers = this.markers.filter(marker => marker !== markerToRemove);
-    }
+  navigateToSCP() {
+    this.router.navigate(['/social-child-projects']);
   }
 
-  getMarkers(): Marker[] {
-    return this.markers;
-  }
-
-  toggleSchools() {
-    if (this.areSchoolsShown) {
-      this.resetSchools();
-    } else {
-      this.showSchools();
-    }
-  }
-
-   // Method to show schools on map
-   showSchools() {
-    if (this.schoolLayer) {
-      console.log('Removing existing school layer');  // Debugging
-      this.map?.removeLayer(this.schoolLayer);  // Remove existing school layer if any
-    }
-
-    // Remove all existing markers to avoid duplication
-    this.removeAllMarkers();
-
-    const url = 'https://services6.arcgis.com/jiszdsDupTUO3fSM/arcgis/rest/services/Schulen_OpenData/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson';
-    this.http.get(url).subscribe((geoJson: any) => {
-      if (this.map) {
-        this.schoolLayer = geoJSON(geoJson, {
-          onEachFeature: (feature, layer) => {
-            if (feature.geometry.type === 'Point') {
-              const coords = (feature.geometry.coordinates as number[]);
-              console.log(`Processing school feature at ${coords[1]}, ${coords[0]}`);  // Debugging
-              this.addSchoolMarker(coords[1], coords[0], feature.properties.Schulname || 'School');
-            }
-          }
-        });
-        this.schoolLayer.addTo(this.map);
-        this.areSchoolsShown = true;  // Set to true when schools are shown
-        this.showSchoolsButtonText = 'Reset';  // Change button text to Reset
-      }
-    }, error => {
-      console.error('Error fetching school data:', error);
-    });
-  }
-
-  resetSchools() {
-    // Remove all existing markers
-    this.removeAllMarkers();
-    if (this.schoolLayer) {
-      this.map?.removeLayer(this.schoolLayer);
-      this.schoolLayer = undefined;  // Clear the school layer
-    }
-    this.areSchoolsShown = false;  // Set to false when schools are reset
-    this.showSchoolsButtonText = 'Schools';  // Change button text back to Schools
+  navigateToSTP() {
+    this.router.navigate(['/social-teenager-projects']);
   }
 }

@@ -10,9 +10,11 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements OnInit{
 
   isAuthenticated$: Observable<boolean>;
+  
 
   constructor(private authService: AuthService) {
     this.isAuthenticated$ = this.authService.isAuthenticated();
+   
   }
 
   ngOnInit(): void {}
