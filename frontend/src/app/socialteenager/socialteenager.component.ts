@@ -63,7 +63,7 @@ export class SocialteenagerComponent implements OnInit {
             const coords = feature.geometry.coordinates;
             const latLngCoords: [number, number] = [coords[1], coords[0]];
             const stpMarker = marker(latLng(latLngCoords), { icon: this.schoolIcon })
-              .bindPopup(`<b>You clicked here</b><br>Latitude: ${coords[1]}, Longitude: ${coords[0]}<br><button onclick="savePointOfInterest(${coords[1]}, ${coords[0]})">Save as Point of Interest</button>`);
+            .bindPopup(`<b>You clicked here</b><br><br><button class="btn btn-primary" onclick="savePointOfInterest(${coords[1]}, ${coords[0]})">Save as Point of Interest</button>`);
             stpMarker.addTo(this.map!);
             this.markers.push(stpMarker);
           });

@@ -1,40 +1,65 @@
 .custom-navbar {
-    height: 120px; /* Adjust the height as needed */
-    background-color: #2471A3 ;
-  }
-  .custom-navbar .navbar-brand {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
+  height: 120px; /* Adjust the height as needed */
+  background-color: #2471A3;
+}
+.custom-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.custom-navbar a {
+  font-weight: bold;
+  color: white;
+}
+.custom-navbar a:hover {
+  color: #F9E79F;
+}
+.custom-navbar .navbar-brand img {
+  margin: 20px;
+}
+.custom-navbar .navbar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: white;
+  padding: 0 25px; /* Adjust the padding to increase spacing */
+  font-weight: bold; /* Increase the font size */
+  font-size: large;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+.custom-navbar .navbar-nav .nav-link:hover {
+  color: #F9E79F; /* Change this color to your desired hover color */
+}
+.custom-navbar .navbar-nav .nav-item {
+  margin: 10px; /* Add margin between nav items */
+}
+.custom-navbar .navbar-toggler {
+  align-self: center;
+}
 
-  a{
-    font-weight: bold;
-    color: white;
-  }
-
-  a:hover{
-    color: #F9E79F;
+@media (max-width: 991px) {
+  .custom-navbar {
+    height: auto; /* Allow navbar to adjust height on smaller screens */
   }
   .custom-navbar .navbar-brand img {
-    margin: 20px;
+    margin: 10px; /* Reduce margin for logo on smaller screens */
   }
   .custom-navbar .navbar-nav .nav-link {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    color: white;
-    padding: 0 25px; /* Adjust the padding to increase spacing */
-    font-weight: bold; /* Increase the font size */
-    font-size: large;
-    transition: color 0.3s; /* Smooth transition for hover effect */
-  }
-  .custom-navbar .navbar-nav .nav-link:hover {
-    color: #F9E79F; /* Change this color to your desired hover color */
+    padding: 10px; /* Adjust padding for nav links on smaller screens */
+    font-size: medium; /* Adjust font size for nav links on smaller screens */
   }
   .custom-navbar .navbar-nav .nav-item {
-    margin: 10px; /* Add margin between nav items */
+    margin: 5px 0; /* Adjust margin for nav items on smaller screens */
   }
-  .custom-navbar .navbar-toggler {
-    align-self: center;
+}
+
+@media (max-width: 576px) {
+  .custom-navbar .navbar-brand img {
+    width: 75px; /* Adjust logo size on extra small screens */
+    height: 65px;
   }
+  .custom-navbar .navbar-nav .nav-link {
+    padding: 5px; /* Further adjust padding for nav links on extra small screens */
+    font-size: small; /* Adjust font size for nav links on extra small screens */
+  }
+}

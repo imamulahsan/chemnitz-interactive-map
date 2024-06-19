@@ -66,7 +66,7 @@ export class SocialchildComponent implements OnInit {
             const coords = feature.geometry.coordinates;
             const latLngCoords: [number, number] = [coords[1], coords[0]];  // GeoJSON format [longitude, latitude]
             const scpMarker = marker(latLng(latLngCoords), { icon: this.schoolIcon })
-              .bindPopup(`<b>You clicked here</b><br>Latitude: ${coords[1]}, Longitude: ${coords[0]}<br><button onclick="savePointOfInterest(${coords[1]}, ${coords[0]})">Save as Point of Interest</button>`);
+            .bindPopup(`<b>You clicked here</b><br><br><button class="btn btn-primary" onclick="savePointOfInterest(${coords[1]}, ${coords[0]})">Save as Point of Interest</button>`);
             scpMarker.addTo(this.map!);
             this.markers.push(scpMarker);
           });

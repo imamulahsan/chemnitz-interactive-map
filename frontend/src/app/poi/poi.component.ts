@@ -60,9 +60,10 @@ export class PoiComponent {
     const coords = event.latlng;
     const popupContent = `
       <div>
-        <p>Do you want this latitude (${coords.lat}) and longitude (${coords.lng}) as your home location?</p>
-        <button class="btn btn-primary" id="confirmButton">Yes</button>
-        <button class="btn btn-secondary" id="cancelButton">No</button>
+        <p>Do you want this as your home location?</p>
+        <br>
+        <button class="btn btn-primary" >Yes</button>
+        <button class="btn btn-secondary">No</button>
       </div>
     `;
 
@@ -163,6 +164,7 @@ export class PoiComponent {
       const popupContent = `
         <div>
           <p><strong>THIS IS YOUR POINT OF INTEREST</strong></p>
+          <br>
           <p>Latitude: ${this.poiLocation.lat}</p>
           <p>Longitude: ${this.poiLocation.lng}</p>
         </div>

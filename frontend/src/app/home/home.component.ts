@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { icon, latLng, marker, tileLayer, Map, LeafletMouseEvent, popup, Marker } from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -42,34 +43,76 @@ export class HomeComponent {
   }
 
   onMapClick(event: LeafletMouseEvent) {
-    const coords = event.latlng;
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.showLoginPrompt(event.latlng);
+    } else {
+      this.showSetHomeLocationPrompt(event.latlng);
+    }
+  }
+
+  showLoginPrompt(latlng: any) {
     const popupContent = `
       <div>
-        <p>Do you want this latitude (${coords.lat}) and longitude (${coords.lng}) as your home location?</p>
-        <button class="btn btn-primary" id="confirmButton">Yes</button>
-        <button class="btn btn-secondary" id="cancelButton">No</button>
+        <p>Please log in to set your home location.</p>
+        <br>
       </div>
     `;
 
     const mapPopup = popup()
-      .setLatLng(coords)
+      .setLatLng(latlng)
       .setContent(popupContent)
       .openOn(this.map!);
 
     setTimeout(() => {
-      const confirmButton = document.getElementById('confirmButton');
-      confirmButton?.addEventListener('click', () => {
-        this.setHomeLocation(coords.lat, coords.lng);
-        this.map?.closePopup(mapPopup);
-      });
-
-      const cancelButton = document.getElementById('cancelButton');
-      cancelButton?.addEventListener('click', () => {
+      const loginButton = document.getElementById('loginButton');
+      loginButton?.addEventListener('click', () => {
+        this.router.navigate(['/login']);
         this.map?.closePopup(mapPopup);
       });
     }, 0);
   }
 
+  showSetHomeLocationPrompt(latlng: any) {
+    const popupContent = `
+      <div>
+        <p>Do you want this as your home location?</p>
+        <br>
+        <button id="confirmButton" class="btn btn-primary">Yes</button>
+        <button id="cancelButton" class="btn btn-secondary">No</button>
+      </div>
+    `;
+  
+    const mapPopup = popup()
+      .setLatLng(latlng)
+      .setContent(popupContent)
+      .openOn(this.map!);
+  
+    setTimeout(() => {
+      const confirmButton = document.getElementById('confirmButton');
+      const cancelButton = document.getElementById('cancelButton');
+  
+      if (confirmButton) {
+        confirmButton.addEventListener('click', () => {
+          console.log('Confirm button clicked');
+          this.setHomeLocation(latlng.lat, latlng.lng);
+          this.map?.closePopup(mapPopup);
+        });
+      } else {
+        console.error('Confirm button not found');
+      }
+  
+      if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+          console.log('Cancel button clicked');
+          this.map?.closePopup(mapPopup);
+        });
+      } else {
+        console.error('Cancel button not found');
+      }
+    }, 0);
+  }
+  
   setHomeLocation(lat: number, lng: number) {
     const token = localStorage.getItem('token');
     if (!token) {
